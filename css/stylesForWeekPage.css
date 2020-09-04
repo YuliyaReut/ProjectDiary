@@ -1,0 +1,25 @@
+#table-week {
+  width: 100%;
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+#table-week > tr {
+  height: 120px;
+  border: 1px solid gray;
+
+}
+#table-week th {
+  border: 1px solid gray;
+  height: 90px;
+  width: 14%;
+}
+#table-week td {
+  min-height: 550px;
+  width: 14%;
+  border: 1px solid gray;
+  vertical-align: top;
+}
+#today-week-calendar {
+  background-color: #136a9f;
+  color: white;
+}

@@ -1,0 +1,66 @@
+
+body, button, table , th{
+  font-family: 'Kalam', cursive;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+header {
+  width: 100%;
+}
+header > div {
+  display: inline-block;
+  vertical-align: middle;
+}
+.border-block {
+  width: 35%;
+}
+.center-block {
+  display: inline-flex;
+  justify-content: center;
+  width: 28%;
+}
+button {
+  width: 90px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  background-color: white;
+  margin: 0px 5px;
+  font-size: 14px;
+}
+button:hover {
+  color: white;
+  background-color: #136a9f;
+}
+
+.button-center {
+  width: 25px;
+}
+#date-on-page {
+  margin: auto 0;
+
+}
+#date-on-page > label {
+  font-size: 14px;
+  text-align: center;
+  vertical-align: center;
+  cursor: pointer;
+}
+#right-block {
+  font-size: 14px;
+  display: inline-flex;
+}
+#weather {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+
+}
+.button-right {
+  float: right;
+}
+
+
+

@@ -1,0 +1,35 @@
+#day-table {
+  width: 100%;
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+#day-table > tr {
+  border: 1px solid gray;
+}
+#day-table td {
+  display: inline-flex;
+  height: 30px;
+  z-index: 100;
+}
+table#day-table td:first-child{
+  display: inline-block;
+  width: 15%;
+  border-right: 1px solid gray;
+  text-align: center;
+
+}
+
+#day-table .block-event-in-table-month {
+  min-width: 165px;
+  max-width: 165px;
+  z-index: 1000;
+  margin-left: 10px;
+  font-size: 14px;
+}
+.div-vertical {
+  display: inline-block;
+  z-index: 1000;
+}
+#datepicker {
+  width: 200px;
+}

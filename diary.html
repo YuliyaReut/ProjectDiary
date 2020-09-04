@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Diary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/stylesForHeader.css">
+    <link rel="stylesheet" href="css/stylesForMonthPage.css">
+    <link rel="stylesheet" href="css/stylesForWeekPage.css">
+    <link rel="stylesheet" href="css/stylesForDayPage.css">
+    <link rel="stylesheet" href="css/stylesForFormNewEvent.css">
+    <link rel="stylesheet" href="js/datepicker/pickmeup.css">
+  </head>
+  <body>
+    <header id="header">
+
+      <div class="border-block">
+        <button type="button" name="button" class="button-left" id="button-month">Month</button>
+        <button type="button" name="button" class="button-left" id="button-week">Week</button>
+        <button type="button" name="button" class="button-left" id="button-day">Day</button>
+      </div>
+
+      <div class="center-block">
+        <button type="button" name="button" class="button-center" id="previous-button" ><</button>
+        <div id="date-on-page"> </div>
+        <div id="month-selector"></div>
+        <button type="button" name="button" class="button-center" id="next-button" > > </button>
+      </div>
+
+      <div class="border-block" id = "right-block">
+        <div id="weather">
+          <label id="temperature"></label> 
+        </div>
+          <button type="button" name="button" class="button-right" id="new-event" >+ Add new</button>
+      </div>
+
+    </header>
+    <br>
+    <div id="main-content"></div>
+
+    <script src="js/datepicker/pickmeup.js"  charset="utf-8"></script>
+    <script src="js/scriptsForHeader.js" type="module" charset="utf-8"></script>
+    <script src="js/scriptsForMonthPage.js"  type="module" charset="utf-8"></script>
+    <script src="js/scriptsForWeekPage.js"  type="module" charset="utf-8"></script>
+    <script src="js/scriptsForDayPage.js"  type="module" charset="utf-8"></script>
+    <script src="js/generalScripts.js"  type="module" charset="utf-8"></script>
+    <script src="js/test.js"  type="module" charset="utf-8"></script>
+    <script src="js/moment.js"   charset="utf-8"></script>
+  </body>
+</html>

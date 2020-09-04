@@ -1,0 +1,74 @@
+#table-days {
+  width: 100%;
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+#table-days > tr {
+  height: 120px;
+  border: 1px solid gray;
+
+}
+#table-days th {
+  border: 1px solid gray;
+  height: 90px;
+}
+#table-days td {
+  height: 90px;
+  width: 14%;
+  border: 1px solid gray;
+  vertical-align: top;
+}
+#table-days td > div#today {
+  background-color: #136a9f;
+  color: white;
+}
+.block-event-in-table-month {
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 2px 5px;
+  margin-top: 2px;
+  color: white;
+}
+.block-event-in-table-month-1 {
+  background-color: #BA55D3;
+}
+.block-event-in-table-month-2 {
+  background-color: #136a9f;
+}
+.block-event-in-table-month-3 {
+  background-color: #3CB371;
+}
+.button-x-more {
+  cursor: pointer;
+  color: black;
+  text-align: center;
+}
+.button-x-more:hover {
+  text-decoration: underline;
+}
+
+#month-selector {
+  display: none;
+  justify-content: center;
+  background-color: white;
+  position: absolute;
+  z-index: 2;
+  top: 45px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+#month-selector > div {
+  text-align: center;
+  padding: 10px;
+}
+#month-selector > div > table {
+  text-align: left;
+
+}
+#month-selector > div > table > tr > td {
+  cursor: pointer;
+  padding: 5px ;
+}
+#month-selector > div > table > tr > td:hover {
+  text-decoration: underline;
+}
