@@ -8,8 +8,8 @@ export let dayOfWeek = ['Monday',
 
 export function createBlockEvent(elem, obj) {
   let div = document.createElement('div');
-  div.innerHTML = obj.name + ' ' + obj.timeFrom + '-' + obj.timeTo;
-  div.className = 'block-event-in-table-month-' + randomInteger(1,3) + ' block-event-in-table-month';
+  div.innerHTML = `${obj.name} ${obj.timeFrom}-${obj.timeTo}`; 
+  div.className = `block-event-in-table-month-${randomInteger(1,3)} block-event-in-table-month`; 
   elem.append(div);
 }
 
@@ -20,8 +20,7 @@ export function getArrayEvents(date) {
     let key = window.localStorage.key(i);
     let obj = JSON.parse(window.localStorage.getItem(key));
     if (obj.date == date.format('YYYY-MM-DD')) {
-      array[j] = obj;
-      j++;
+      array = [...array, obj];
     }
   }
   array.sort((a,b) => getTimeInMin(a.timeFrom) > getTimeInMin(b.timeFrom) ? 1 : -1);

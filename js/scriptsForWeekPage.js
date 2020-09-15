@@ -50,7 +50,7 @@ export function createWeekCalendar(elem, date) {
 export function changeDateOnPage(date) {
   document.getElementById('date-on-page').innerHTML = '';
   let label = document.createElement('label');
-  label.innerHTML = date.format('DD MMMM YYYY') + ' - ' + date.add(6,'days').format('DD MMMM YYYY');;
+  label.innerHTML = `${date.format('DD MMMM YYYY')} - ${date.add(6,'days').format('DD MMMM YYYY')}`;
   document.getElementById('date-on-page').appendChild(label);
   dateOnPage = date;
 }

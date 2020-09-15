@@ -150,7 +150,7 @@ function showWeekSelector() {
     let tr = document.createElement('tr');
     tableOfWeeks.append(tr);
     let td = document.createElement('td');
-    let startMonth = moment (dateOnPage.format('YYYY MM') + ' 01', 'YYYY MM DD');
+    let startMonth = moment (`${dateOnPage.format('YYYY MM')} 01`, 'YYYY MM DD');
     startMonth.subtract(startMonth.isoWeekday()-1,'days');
     if (dateOnPage.format('MM') == startMonth.format('MM')) { //if month starts from monday
       createWeekSelector(tableOfWeeks, 1, startMonth);
@@ -171,7 +171,7 @@ function createWeekSelector(tableOfWeeks, i, startMonth) {
       updatePage();
       createWeekCalendar(document.getElementById('main-content'), monthNow);
     });
-    td.innerHTML = startMonth.format('DD.MM.YYYY') + ' - ' + startMonth.add(6,'days').format('DD.MM.YYYY');
+    td.innerHTML = `${startMonth.format('DD.MM.YYYY')} - ${startMonth.add(6,'days').format('DD.MM.YYYY')}`;
     startMonth.add(1,'days');
     tr.append(td);
     tableOfWeeks.append(tr);
@@ -184,8 +184,8 @@ async function showTemperature() {
   if (response.ok) {
     let json = await response.json();
     let temp = +json.main.temp;
-    document.getElementById('temperature').innerHTML = 'Weather in Gomel - ' + (+temp - 273.15) + '&deg;';
+    document.getElementById('temperature').innerHTML = `Weather in Gomel - ${+temp - 273.15}&deg;`;
   } else {
-    alert("Ошибка HTTP: " + response.status);
+    alert(`Ошибка HTTP: ${response.status}`);
   }
 }

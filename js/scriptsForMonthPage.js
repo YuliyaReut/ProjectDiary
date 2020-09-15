@@ -19,7 +19,7 @@ export function createCalendar(elem, date) {
   }
   table.appendChild(tr);
   tr = document.createElement('tr');
-  date = moment(date.format('YYYY-MM')+'-01', 'YYYY-MM-DD');
+  date = moment(`${date.format('YYYY-MM')}-01`, 'YYYY-MM-DD');
   for (let i = 0; i < date.isoWeekday()-1; i++) {       //creating empty cells until the first day of month
     tr.append(document.createElement('td'));
   }
@@ -49,7 +49,7 @@ export function createCalendar(elem, date) {
         createBlockEvent(td, arrayDayEvents[i]);
       }
       let div = document.createElement('div');
-      div.innerHTML = '+ ' + (+arrayLength-3) +' more';
+      div.innerHTML = `+ ${(+arrayLength-3)} more`;
       div.className = 'button-x-more';
       div.onclick = function() {
         updatePage();
@@ -81,11 +81,15 @@ function changeDateOnPage(date) {
   label.innerHTML = date.format('MMMM YYYY');
   document.getElementById('date-on-page').appendChild(label);
 }
+function getDateOnPage() {
+  return moment(document.getElementById('date-on-page').textContent, 'MMMM YYYY');
+}
 export function showNextMonth() {
   updatePage();
-  createCalendar(document.getElementById('main-content'), date.add(1,'months'));
+  createCalendar(document.getElementById('main-content'), getDateOnPage().add(1,'months'));
+
 }
 export function showPreviousMonth() {
   updatePage();
-  createCalendar(document.getElementById('main-content'), date.subtract(1,'months'));
+  createCalendar(document.getElementById('main-content'), getDateOnPage().subtract(1,'months'));
 }

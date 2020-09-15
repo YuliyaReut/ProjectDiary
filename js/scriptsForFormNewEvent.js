@@ -60,7 +60,7 @@ function createButtonMore(value, timeHourMin) {
   let button = document.createElement('button');
   button.className = 'button-value-more';
   button.type='button';
-  button.id = value + '-' + timeHourMin + '-more';
+  button.id = `${value}-${timeHourMin}-more`; 
   button.innerHTML = '&#8743;';
   return button;
 }
@@ -68,7 +68,7 @@ function createButtonLess(value, timeHourMin) {
   let button = document.createElement('button');
   button.className = 'button-value-less';
   button.type='button';
-  button.id = value + '-' + timeHourMin + '-less';
+  button.id = `${value}-${timeHourMin}-less`;
   button.innerHTML = '&#8744;';
   return button;
 }
@@ -84,7 +84,7 @@ function createTimeField(timeToFrom, timeHourMin){
   let input = document.createElement('input');
   input.type = 'text';
   input.className = 'inputRequired';
-  input.id = 'time-' + timeHourMin + '-' + timeToFrom;
+  input.id = `time-${timeHourMin}-${timeToFrom}`;
   input.placeholder = '00';
   return input;
 }
@@ -127,12 +127,22 @@ function checkCorrectDate(elem) {
 export function checkFreeTime(timeFrom, timeTo, date) {
   let array = getArrayEvents(date);
   for (let i = 0; i < array.length; i++) {
-    if ((getTimeInMin(timeFrom) > getTimeInMin(array[i].timeFrom) && getTimeInMin(timeFrom) < getTimeInMin(array[i].timeTo) || getTimeInMin(timeTo) > getTimeInMin(array[i].timeFrom) && getTimeInMin(timeTo) < getTimeInMin(array[i].timeTo)) ) {
+    if ((getTimeInMin(timeFrom) > getTimeInMin(array[i].timeFrom) 
+      && getTimeInMin(timeFrom) < getTimeInMin(array[i].timeTo) || getTimeInMin(timeTo) > getTimeInMin(array[i].timeFrom) 
+      && getTimeInMin(timeTo) < getTimeInMin(array[i].timeTo)) ) {
       throw new Error('You already have some event in this time!');
     }
   }
   if (getTimeInMin(timeTo) <= getTimeInMin(timeFrom)) {
     throw new Error('"Time to" need to be more than "Time from"!');
+  }
+  if (timeFrom.split(':')[0] > 24 || timeFrom.split(':')[0] < 0 
+      || timeFrom.split(':')[1] > 59 || timeFrom.split(':')[1] < 0) {
+    throw new Error('Not a correct field "Time from!"');
+  }
+  if (timeTo.split(':')[0] > 24 || timeTo.split(':')[0] < 0 
+      || timeTo.split(':')[1] > 59 || timeTo.split(':')[1] < 0) {
+    throw new Error('Not a correct field "Time to!"');
   }
 }
 export function checkCorrectField(elem, place) {
@@ -144,61 +154,90 @@ export function checkCorrectField(elem, place) {
 }
 export function buttonMoreValue(elem){
   let value = +elem.value;
-  if (elem.id.indexOf('hour') != -1) {    //change field with hours
-    if (typeof value == 'number' && Number.isInteger(value) && value >= 0 && value <23) {
-      if (value >= 0 && value < 9) {
-        value +=1;
-        return '0' + value;
-      }
-      return value + 1;
-    }else
-      if (value == 24) {
-        return '01';
-      }else
-        if (value == 23) {
-          return '00';
+  switch (true) {    //change field with hours
+    case elem.id.indexOf('hour') != -1:
+        switch (true) {
+          case typeof value == 'number' && Number.isInteger(value) && value >= 0 && value <23: 
+              switch (true) {
+                case value >= 0 && value < 9:
+                    value +=1;
+                    return '0' + value; 
+                    break;
+                default: 
+                    return value + 1;
+              }
+              break;
+          case value == 23:
+              return '00';
+              break;
+          case value == 24: 
+              return '01';
+              break;
+          default:
+              throw new Error('Not correct hours!');
         }
-
-  } else {     //change field with minutes
-    if (typeof value == 'number' && Number.isInteger(value) && value >= 0 && value <59) {
-      if (value >= 0 && value < 9) {
-        value +=1;
-        return '0' + value;
-      }
-      return value + 1;
-    }else
-      if (value == 59) {
-        return '00';
-      }
+        break;
+    default:    //change field with minutes
+        switch (true) {
+          case typeof value == 'number' && Number.isInteger(value) && value >= 0 && value <59:
+              switch (true) {
+                case value >= 0 && value < 9:
+                    value +=1;
+                    return '0' + value;
+                    break;
+                default:
+                    return value + 1;
+              }
+              break;
+          case value == 59:
+              return '00';
+              break;
+          default: 
+              throw new Error('Not correct minutes!');
+        }
   }
-  throw new Error('Not a correct time!');
 }
-export function buttonLessValue(elem){
+export function buttonLessValue(elem) {
   let value = +elem.value;
-  if (elem.id.indexOf('hour') != -1) {      //change field with hours
-    if (typeof value == 'number' && Number.isInteger(value) && value > 0 && value <=24) {
-      if (value > 0 && value < 11) {
-        value -=1;
-        return '0' + value;
-      }
-      return value - 1;
-    }else
-      if (value == 0) {
-        return '23';
-      }
-  } else {
-    if (typeof value == 'number' && Number.isInteger(value) && value > 0 && value <=59) {
-      if (value >= 0 && value < 9) {  //change field with minutes
-        value -=1;
-        return '0' + value;
-      }
-      return value - 1;
-    }else
-      if (value == 0) {
-        return '59';
-      }
+  switch (true) {
+    case elem.id.indexOf('hour') != -1:      //change field with hours
+        switch (true) {
+          case typeof value == 'number' && Number.isInteger(value) && value > 0 && value <=24:
+              switch (true) {
+                case value > 0 && value < 11:
+                    value -=1;
+                    return '0' + value;
+                    break;
+                default:
+                    return value - 1;
+              }
+              break;
+          case value == 0:
+              return '23';
+              break;
+          default:
+              throw new Error('Not correct hours!');
+        } 
+        break;
+    default:
+        switch (true) {
+          case typeof value == 'number' && Number.isInteger(value) && value > 0 && value <=59:
+              switch (true) {
+                case value >= 0 && value < 9:  //change field with minutes
+                    value -=1;
+                    return '0' + value;
+                    break;
+                default:
+                    return value - 1;
+              }
+              break;
+          case value == 0:
+              return '59';
+              break;
+          default:
+              throw new Error('Not correct minutes!');
+        }
   }
-  throw new Error('Not a correct time!');
 }
 
 //set onclick for buttons to change values in form
@@ -222,15 +261,18 @@ export function addNewEvent() {
   showCover();
   createFormNewEvent();
 
-  setOnClickButton('time-from-hour-more','time-hour-from',buttonMoreValue);
-  setOnClickButton('time-from-hour-less','time-hour-from',buttonLessValue);
-  setOnClickButton('time-from-min-more','time-min-from',buttonMoreValue);
-  setOnClickButton('time-from-min-less','time-min-from',buttonLessValue);
-  setOnClickButton('time-to-hour-more','time-hour-to',buttonMoreValue);
-  setOnClickButton('time-to-hour-less','time-hour-to',buttonLessValue);
-  setOnClickButton('time-to-min-more','time-min-to',buttonMoreValue);
-  setOnClickButton('time-to-min-less','time-min-to',buttonLessValue);
+  let arrayOfButtons = [['time-from-hour-more','time-hour-from',buttonMoreValue],
+                        ['time-from-hour-less','time-hour-from',buttonLessValue],
+                        ['time-from-min-more','time-min-from',buttonMoreValue],
+                        ['time-from-min-less','time-min-from',buttonLessValue],
+                        ['time-to-hour-more','time-hour-to',buttonMoreValue],
+                        ['time-to-hour-less','time-hour-to',buttonLessValue],
+                        ['time-to-min-more','time-min-to',buttonMoreValue],
+                        ['time-to-min-less','time-min-to',buttonLessValue]]
 
+  for (let i=0; i < arrayOfButtons.length; i++) {
+    setOnClickButton(...arrayOfButtons[i]);
+  }
   document.getElementById('close-form-new-event').onclick = function() { deleteFormNewEvent(); };
   document.getElementById('create-event').onclick = function() {
     try {
@@ -269,9 +311,9 @@ function setEvent(name, description, date, timeFrom, timeTo) {
     timeFrom: timeFrom,
     timeTo: timeTo,
   };
-  window.localStorage.setItem(date + '_' + name + '-' + timeFrom, JSON.stringify(obj));
+  window.localStorage.setItem(`${date}_${name}-${timeFrom}`, JSON.stringify(obj));
 }
 
 function getTimeFromTo(timeHour, timeMin) {
-  return timeHour + ':' + timeMin;
+  return `${timeHour}:${timeMin}`;
 }
